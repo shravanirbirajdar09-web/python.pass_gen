@@ -120,28 +120,17 @@ def ask_questions():
 # --------------------------------
 # FUNCTION: GENERATE PASSWORD
 # --------------------------------
+def generate_password(answers, length):
 
-def generate_password(answers,length):
+    import random
 
-    base = ""
+    base = "".join(answers)
+    base = base.replace(" ", "")
 
-    for ans in answers:
-        if len(ans) >= 2:
-            base += ans[:2]
-        else:
-            base += ans
+    chars = list(base)
+    random.shuffle(chars)
 
-    upper = random.choice(string.ascii_uppercase)
-    lower = random.choice(string.ascii_lowercase)
-    digit = random.choice(string.digits)
-    symbol = random.choice(string.punctuation)
-
-    password = base + upper + lower + digit + symbol
-
-    while len(password) < length:
-        password += random.choice(string.ascii_letters + string.digits + string.punctuation)
-
-    password = ''.join(random.sample(password,len(password)))
+    password = "".join(chars[:length])
 
     return password
 
